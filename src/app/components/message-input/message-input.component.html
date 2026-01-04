@@ -1,0 +1,14 @@
+
+<form (ngSubmit)="handleSubmit()" class="input-form">
+  <textarea
+    [(ngModel)]="messageText"
+    name="messageText"
+    (keydown)="handleKeydown($event)"
+    placeholder="Écrivez votre message..."
+    rows="1"
+  ></textarea>
+
+  <button type="submit" [disabled]="!messageText().trim()">
+    Envoyer
+  </button>
+</form>

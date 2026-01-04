@@ -1,0 +1,12 @@
+<div class="chat-container">
+  <h2>Mon Gemini Chat ({{ messageCount() }} messages)</h2>
+
+  <app-message-list [messages]="messages()"></app-message-list>
+
+  @if (isLoading()) {
+    <div class="loader-container">
+      <span class="dot-animation">Gemini réfléchit...</span>
+    </div>
+  }
+
+  <app-message-input (onSendMessage)="addNewMessage($event)"></app-message-input>

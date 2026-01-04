@@ -1,0 +1,5 @@
+@for (msg of messages(); track msg.id) {
+  <app-message-item [message]="msg"></app-message-item>
+} @empty {
+  <p>Aucun message, commencez une conversation !</p>
+}

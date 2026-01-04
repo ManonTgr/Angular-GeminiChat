@@ -1,0 +1,14 @@
+<div class="message-bubble" 
+     [class.user]="message().role === 'user'" 
+     [class.assistant]="message().role === 'assistant'">
+  
+  <div class="header">
+    <strong>{{ message().role === 'user' ? 'Vous' : 'Gemini' }}</strong>
+  </div>
+
+  <div class="content">
+    {{ message().text }}
+  </div>
+
+  <small class="time">{{ message().timestamp | date:'HH:mm' }}</small>
+</div>

@@ -1,18 +1,21 @@
 import { Component, output, signal } from '@angular/core';
-import { FormsModule } from '@angular/forms'; // Indispensable pour le [(ngModel)]
+import { FormsModule } from '@angular/forms'; 
 
 @Component({
   selector: 'app-message-input',
   standalone: true,
-  imports: [FormsModule], // On importe FormsModule ici
+  imports: [FormsModule], // j'importe 
   templateUrl: './message-input.component.html',
   styleUrl: './message-input.component.css'
 })
 export class MessageInputComponent {
-  // Signal pour lier le textarea au code
+
+
+  // signal pour lier le textarea au code
   messageText = signal('');
 
-  // Définition de l'événement de sortie
+
+  // Evenement de sortie
   onSendMessage = output<string>();
 
   handleSubmit() {
@@ -23,7 +26,7 @@ export class MessageInputComponent {
     }
   }
 
-  // Permet l'envoi avec Entrée (mais pas Shift+Entrée)
+  // Cela permet l'envoi avec entree
   handleKeydown(event: KeyboardEvent) {
     if (event.key === 'Enter' && !event.shiftKey) {
       event.preventDefault(); 

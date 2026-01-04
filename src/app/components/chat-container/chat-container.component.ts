@@ -1,9 +1,9 @@
-import { Component, signal, computed, inject, OnInit } from '@angular/core'; // 1. Ajoutez OnInit ici
+import { Component, signal, computed, inject, OnInit } from '@angular/core'; // J'ajoute OnInit ici
 import { Message } from '../../models/message.model';
 import { MessageListComponent } from '../message-list/message-list.component';
 import { MessageInputComponent } from '../message-input/message-input.component';
 import { GeminiService } from '../../services/gemini.service';
-import { StorageService } from '../../services/storage.service'; // 2. Importez votre nouveau service
+import { StorageService } from '../../services/storage.service'; // Importation du nouveau service
 
 @Component({
   selector: 'app-chat-container',
@@ -12,15 +12,15 @@ import { StorageService } from '../../services/storage.service'; // 2. Importez 
   templateUrl: './chat-container.component.html',
   styleUrl: './chat-container.component.css'
 })
-export class ChatContainerComponent implements OnInit { // 3. Ajoutez "implements OnInit"
+export class ChatContainerComponent implements OnInit {
   private geminiService = inject(GeminiService);
-  private storageService = inject(StorageService); // 4. Injectez le StorageService
+  private storageService = inject(StorageService); //Injection de StorageService
 
   messages = signal<Message[]>([]);
   isLoading = signal<boolean>(false);
   messageCount = computed(() => this.messages().length);
 
-  // 5. Cette méthode charge l'historique au lancement de l'application
+  //Chargement de l'historique
   ngOnInit() {
     const savedMessages = this.storageService.loadMessages();
     this.messages.set(savedMessages);
@@ -49,7 +49,7 @@ export class ChatContainerComponent implements OnInit { // 3. Ajoutez "implement
           timestamp: new Date()
         };
         
-        // Mise à jour et SAUVEGARDE de la réponse de l'IA
+        // Mise à jour et sauvegarde de la réponse de l'IA
         this.messages.update(prev => [...prev, assistantMessage]);
         this.storageService.saveMessages(this.messages());
       },
@@ -62,7 +62,7 @@ export class ChatContainerComponent implements OnInit { // 3. Ajoutez "implement
           timestamp: new Date()
         };
         this.messages.update(prev => [...prev, errorMessage]);
-        this.storageService.saveMessages(this.messages()); // Sauvegarde aussi l'erreur si besoin
+        this.storageService.saveMessages(this.messages()); // Sauvegarde aussi l'erreur 
         this.isLoading.set(false);
       },
       complete: () => {
